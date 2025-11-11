@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azamjon Company - Кожаные изделия ручной работы</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #000000;
+            --accent-color: #c9a769;
+            --light-accent: #e6d5b8;
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --light-gray: #f5f5f5;
+            --border-color: #e0e0e0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background-color: var(--bg-color);
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+        }
+        
+        .logo-subtitle {
+            font-size: 12px;
+            color: var(--text-color);
+            margin-top: -5px;
+            letter-spacing: 2px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+            position: relative;
+            font-weight: 500;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--accent-color);
+        }
+        
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            background-color: var(--light-gray);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f5f5f5"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="%23e0e0e0" stroke-width="0.5"/></svg>');
+            opacity: 0.5;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: var(--text-color);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            letter-spacing: 1px;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--light-accent);
+        }
+        
+        /* Categories */
+        .categories {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 32px;
+            color: var(--primary-color);
+            position: relative;
+            font-weight: 300;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .category-card {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .category-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .category-card:hover .category-image {
+            transform: scale(1.05);
+        }
+        
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 20px;
+            color: white;
+        }
+        
+        .category-name {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .category-count {
+            font-size: 14px;
+            color: var(--light-gray);
+        }
+        
+        /* Products */
+        .products {
+            padding: 80px 0;
+            background-color: var(--light-gray);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-name {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .product-price {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--accent-color);
+            border: none;
+            color: var(--bg-color);
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background-color: var(--light-accent);
+        }
+        
+        /* About */
+        .about {
+            padding: 80px 0;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-content {
+            flex: 1;
+        }
+        
+        .about-content h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-weight: 300;
+        }
+        
+        .about-content p {
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+        
+        /* Features */
+        .features {
+            padding: 60px 0;
+            background-color: var(--light-gray);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .feature-description {
+            color: var(--text-color);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: var(--bg-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--accent-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: var(--bg-color);
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .about {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div>
+                        <div class="logo-text">AZAMJON COMPANY</div>
+                        <div class="logo-subtitle">HANDMADE LEATHER</div>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="active">Главная</a></li>
+                        <li><a href="#categories">Категории</a></li>
+                        <li><a href="#products">Товары</a></li>
+                        <li><a href="#about">О нас</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <div class="cart-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                        <div class="cart-count">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Искусство кожаных изделий</h1>
+                <p>Роскошные кожаные изделия ручной работы, созданные с вниманием к деталям и уважением к традициям.</p>
+                <a href="#categories" class="cta-button">Смотреть коллекцию</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="categories" class="categories">
+        <div class="container">
+            <h2 class="section-title">Категории</h2>
+            <div class="categories-grid">
+                <div class="category-card" data-category="belts">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23ffffff'/><rect x='50' y='120' width='300' height='60' fill='%23c9a769'/><text x='50%' y='50%' font-family='Arial' font-size='24' fill='%23000' text-anchor='middle'>Ремни</text></svg>" alt="Ремни" class="category-image">
+                    <div class="category-overlay">
+                        <div class="category-name">Ремни</div>
+                        <div class="category-count">12 товаров</div>
+                    </div>
+                </div>
+                <div class="category-card" data-category="wallets">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23ffffff'/><rect x='150' y='100' width='100' height='150' rx='10' fill='%23c9a769'/><text x='50%' y='50%' font-family='Arial' font-size='24' fill='%23000' text-anchor='middle'>Кошельки</text></svg>" alt="Кошельки" class="category-image">
+                    <div class="category-overlay">
+                        <div class="category-name">Кошельки</div>
+                        <div class="category-count">8 товаров</div>
+                    </div>
+                </div>
+                <div class="category-card" data-category="shoes">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23ffffff'/><path d='M100,200 Q150,150 200,200 Q250,250 300,200' stroke='%23c9a769' stroke-width='10' fill='none'/><text x='50%' y='50%' font-family='Arial' font-size='24' fill='%23000' text-anchor='middle'>Обувь</text></svg>" alt="Обувь" class="category-image">
+                    <div class="category-overlay">
+                        <div class="category-name">Обувь</div>
+                        <div class="category-count">15 товаров</div>
+                    </div>
+                </div>
+                <div class="category-card" data-category="women">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23ffffff'/><circle cx='200' cy='150' r='80' fill='%23c9a769' opacity='0.3'/><text x='50%' y='50%' font-family='Arial' font-size='24' fill='%23000' text-anchor='middle'>Для женщин</text></svg>" alt="Для женщин" class="category-image">
+                    <div class="category-overlay">
+                        <div class="category-name">Для женщин</div>
+                        <div class="category-count">20 товаров</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hands"></i>
+                    </div>
+                    <h3 class="feature-title">Ручная работа</h3>
+                    <p class="feature-description">Каждое изделие создается вручную с вниманием к деталям и заботой о качестве.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 class="feature-title">Натуральная кожа</h3>
+                    <p class="feature-description">Используем только натуральную кожу высшего качества от проверенных поставщиков.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3 class="feature-title">Гарантия качества</h3>
+                    <p class="feature-description">Предоставляем гарантию на все наши изделия и уверены в их долговечности.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3 class="feature-title">Быстрая доставка</h3>
+                    <p class="feature-description">Доставляем заказы по всему Таджикистану в кратчайшие сроки.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="products">
+        <div class="container">
+            <h2 class="section-title">Популярные товары</h2>
+            <div class="products-grid">
+                <!-- Товары будут добавляться через JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-image">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'><rect width='600' height='400' fill='%23f5f5f5'/><rect x='100' y='100' width='400' height='200' fill='%23c9a769' opacity='0.3'/><text x='50%' y='50%' font-family='Arial' font-size='24' fill='%23000' text-anchor='middle'>О Azamjon Company</text></svg>" alt="О нас">
+            </div>
+            <div class="about-content">
+                <h2>О Azamjon Company</h2>
+                <p>Мы - мастера своего дела, создающие уникальные кожаные изделия уже более 20 лет. Наша философия основана на сочетании традиционных методов обработки кожи с современным дизайном.</p>
+                <p>Каждое изделие создается вручную с вниманием к деталям, что гарантирует непревзойденное качество и долговечность. Мы используем только натуральную кожу высшего качества.</p>
+                <p>Наша миссия - предложить вам не просто аксессуар, а произведение искусства, которое будет служить вам годами и станет частью вашего стиля.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Категории</h3>
+                    <ul>
+                        <li><a href="#">Ремни</a></li>
+                        <li><a href="#">Кошельки</a></li>
+                        <li><a href="#">Обувь</a></li>
+                        <li><a href="#">Для женщин</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Помощь</h3>
+                    <ul>
+                        <li><a href="#">Доставка</a></li>
+                        <li><a href="#">Оплата</a></li>
+                        <li><a href="#">Возврат</a></li>
+                        <li><a href="#">Размеры</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li>Телефон: +992 123 456 789</li>
+                        <li>Email: info@azamjon-company.tj</li>
+                        <li>Адрес: Душанбе, пр. Рудаки 45</li>
+                    </ul>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Подписка</h3>
+                    <p>Подпишитесь на нашу рассылку, чтобы первыми узнавать о новых коллекциях и специальных предложениях.</p>
+                    <form>
+                        <input type="email" placeholder="Ваш email" style="padding: 10px; width: 100%; margin-bottom: 10px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 4px;">
+                        <button type="submit" class="add-to-cart" style="margin-top: 10px;">Подписаться</button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Azamjon Company. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Данные о товарах
+        const products = [
+            { id: 1, name: "Кожаный ремень с пряжкой", category: "belts", price: 20, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='250' height='200' viewBox='0 0 250 200'><rect width='250' height='200' fill='%23ffffff'/><rect x='25' y='85' width='200' height='30' fill='%23c9a769'/><text x='50%' y='50%' font-family='Arial' font-size='16' fill='%23000' text-anchor='middle'>Ремень</text></svg>" },
+            { id: 2, name: "Кожаный кошелек", category: "wallets", price: 16, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='250' height='200' viewBox='0 0 250 200'><rect width='250' height='200' fill='%23ffffff'/><rect x='75' y='50' width='100' height='150' rx='10' fill='%23c9a769'/><text x='50%' y='50%' font-family='Arial' font-size='16' fill='%23000' text-anchor='middle'>Кошелек</text></svg>" },
+            { id: 3, name: "Кожаные ботинки", category: "shoes", price: 65, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='250' height='200' viewBox='0 0 250 200'><rect width='250' height='200' fill='%23ffffff'/><path d='M50,150 Q100,100 150,150 Q200,200 225,150' stroke='%23c9a769' stroke-width='15' fill='none'/><text x='50%' y='50%' font-family='Arial' font-size='16' fill='%23000' text-anchor='middle'>Ботинки</text></svg>" },
+            { id: 4, name: "Ремень классический", category: "belts", price: 18, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='250' height='200' viewBox='0 0 250 200'><rect width='250' height='200' fill='%23ffffff'/><rect x='25' y='85' width='200' height='30' fill='%23c9a769'/><text x='50%' y='50%' font-family='Arial' font-size='16' fill='%23000' text-anchor='middle'>Ремень</text></svg>" },
+            { id: 5, name: "Женская сумочка", category: "women", price: 45, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='250' height='200' viewBox='0 0 250 200'><rect width='250' height='200' fill='%23ffffff'/><rect x='75' y='50' width='100' height='120' rx='10' fill='%23c9a769'/><line x1='100' y1='50' x2='150' y2='50' stroke='%23c9a769' stroke-width='5'/><text x='50%' y='50%' font-family='Arial' font-size='16' fill='%23000' text-anchor='middle'>Сумочка</text></svg>" },
+            { id: 6, name: "Кожаные туфли", category: "shoes", price: 55, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='250' height='200' viewBox='0 0 250 200'><rect width='250' height='200' fill='%23ffffff'/><path d='M75,150 Q125,100 175,150' stroke='%23c9a769' stroke-width='10' fill='none'/><text x='50%' y='50%' font-family='Arial' font-size='16' fill='%23000' text-anchor='middle'>Туфли</text></svg>" },
+            { id: 7, name: "Женский кошелек", category: "women", price: 22, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='250' height='200' viewBox='0 0 250 200'><rect width='250' height='200' fill='%23ffffff'/><rect x='87.5' y='62.5' width='75' height='112.5' rx='7' fill='%23c9a769'/><text x='50%' y='50%' font-family='Arial' font-size='16' fill='%23000' text-anchor='middle'>Кошелек</text></svg>" },
+            { id: 8, name: "Женские туфли", category: "women", price: 60, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='250' height='200' viewBox='0 0 250 200'><rect width='250' height='200' fill='%23ffffff'/><path d='M75,150 Q125,120 175,150' stroke='%23c9a769' stroke-width='8' fill='none'/><text x='50%' y='50%' font-family='Arial' font-size='16' fill='%23000' text-anchor='middle'>Туфли</text></svg>" }
+        ];
+
+        // Отображение товаров
+        function displayProducts(category = 'all') {
+            const productsGrid = document.querySelector('.products-grid');
+            productsGrid.innerHTML = '';
+            
+            const filteredProducts = category === 'all' 
+                ? products 
+                : products.filter(product => product.category === category);
+            
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-price">$${product.price}</div>
+                        <button class="add-to-cart" data-id="${product.id}">Добавить в корзину</button>
+                    </div>
+                `;
+                productsGrid.appendChild(productCard);
+            });
+            
+            // Добавляем обработчики событий для кнопок "Добавить в корзину"
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    addToCart(productId);
+                });
+            });
+        }
+        
+        // Функция добавления в корзину
+        function addToCart(productId) {
+            const cartCount = document.querySelector('.cart-count');
+            let count = parseInt(cartCount.textContent);
+            cartCount.textContent = count + 1;
+            
+            // Здесь можно добавить логику для сохранения товара в корзине
+            alert('Товар добавлен в корзину!');
+        }
+        
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            displayProducts();
+            
+            // Обработчики событий для категорий
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    displayProducts(category);
+                    
+                    // Прокрутка к товарам
+                    document.getElementById('products').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Обработчики событий для навигации
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Удаляем активный класс у всех ссылок
+                    document.querySelectorAll('nav a').forEach(a => {
+                        a.classList.remove('active');
+                    });
+                    
+                    // Добавляем активный класс к текущей ссылке
+                    this.classList.add('active');
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId !== '#') {
+                        document.querySelector(targetId).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+  </html>
